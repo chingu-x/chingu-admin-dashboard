@@ -13,10 +13,7 @@ function App() {
   return (
     <>
       <Button>Github</Button>
-      <IconButton
-        ariaLabel="button"
-        className="bg-primary"
-      >
+      <IconButton ariaLabel="button" className="bg-primary">
         Button
       </IconButton>
       <AvatarGroup>
