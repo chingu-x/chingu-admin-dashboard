@@ -1,13 +1,15 @@
 {
-  "name": "my-vue-app",
-  "private": true,
+  "name": "chingu-admin-dasboard",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "prettier": "prettier . --write",
+    "format:changed": "git diff --name-only --diff-filter=d HEAD | grep -e 'src.*\\.[jt]sx\\?$' -e 'src.*\\.json$' -e 'src.*\\.css$' -e 'src.*\\.md$' | xargs prettier -u --write",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -27,6 +29,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "husky": "^9.1.7",
     "semantic-release": "^24.2.1",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
