@@ -1,47 +1,51 @@
+import { Avatar } from "@chingu-x/components/avatar";
+import { AvatarGroup } from "@chingu-x/components/avatar-group";
+import { Button } from "@chingu-x/components/button";
+import { IconButton } from "@chingu-x/components/icon-button";
+import { Tooltip } from "@chingu-x/components/tooltip";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [tooltipHovered, setTooltipHovered] = useState<string>("");
+
+  const users = ["Dan", "Jane", "Tim"];
 
   return (
     <>
-      <div>
-        <a
-          href="https://vite.dev"
-          target="_blank"
-        >
-          <img
-            src={viteLogo}
-            className="logo"
-            alt="Vite logo"
-          />
-        </a>
-        <a
-          href="https://react.dev"
-          target="_blank"
-        >
-          <img
-            src={reactLogo}
-            className="logo react"
-            alt="React logo"
-          />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more!
-      </p>
+      <Button>Github</Button>
+      <IconButton
+        ariaLabel="button"
+        className="bg-primary"
+      >
+        Button
+      </IconButton>
+      <AvatarGroup>
+        {users.map((user) => (
+          <Tooltip
+            key={user}
+            content={user}
+            position="top"
+            tooltipWidth="small"
+            customClassName="text-xs font-medium w-fit"
+            isDisplay={tooltipHovered === user}
+            hovered={tooltipHovered === user}
+          >
+            <Avatar>
+              <img
+                src="https://gravatar.com/avatar/a6416cf1e8d0208251a732a6af75530878cdfd92b85d2de9ba6c4fec92d8a157?s=200&r=g&d=robohash"
+                width={40}
+                height={40}
+                onMouseEnter={() => {
+                  setTooltipHovered(user);
+                }}
+                onMouseLeave={() => {
+                  setTooltipHovered("");
+                }}
+              />
+            </Avatar>
+          </Tooltip>
+        ))}
+      </AvatarGroup>
     </>
   );
 }

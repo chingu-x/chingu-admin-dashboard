@@ -9,9 +9,10 @@
     "format:changed": "git diff --name-only --diff-filter=d HEAD | grep -e 'src.*\\.[jt]sx\\?$' -e 'src.*\\.json$' -e 'src.*\\.css$' -e 'src.*\\.md$' | xargs prettier -u --write",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "dependencies": {
+    "@chingu-x/components": "^0.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
