@@ -70,6 +70,6 @@ export default tseslint.config(
       "@typescript-eslint/dot-notation": "error",
       "react/react-in-jsx-scope": "off",
     },
-    ignores: ["vite-env.d.ts", "vite.config.ts"],
+    ignores: ["vite-env.d.ts", "vite.config.ts", "vitest.config.ts"],
   },
 );
