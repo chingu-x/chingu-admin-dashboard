@@ -1,49 +1,74 @@
-import { Avatar } from "@chingu-x/components/avatar";
-import { AvatarGroup } from "@chingu-x/components/avatar-group";
-import { Button } from "@chingu-x/components/button";
-import { IconButton } from "@chingu-x/components/icon-button";
-import { Tooltip } from "@chingu-x/components/tooltip";
-import { useState } from "react";
+import { Navigate, Route, Routes } from "react-router";
+import DataTable from "./pages/DataTable";
+import MainLayout from "./layouts/MainLayout";
+import AuthLayout from "./layouts/AuthLayout";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+
+const routes = [
+  {
+    label: "Applications",
+    path: "applications",
+    key: 1,
+  },
+  {
+    label: "Solo Projects",
+    path: "solo-projects",
+    key: 2,
+  },
+  {
+    label: "Voyage Signups",
+    path: "voyage-signups",
+    key: 3,
+  },
+  {
+    label: "Voyage Team Status",
+    path: "voyage-team-status",
+    key: 4,
+  },
+  {
+    label: "Voyage Checkins",
+    path: "voyage-checkins",
+    key: 5,
+  },
+  {
+    label: "Voyage Projects",
+    path: "voyage-projects",
+    key: 6,
+  },
+  {
+    label: "Pair Programming Signups",
+    path: "pair-programming-signups",
+    key: 7,
+  },
+  {
+    label: "Pair Programming Feedback",
+    path: "pair-programming-feedback",
+    key: 8,
+  },
+];
 
 function App() {
-  const [tooltipHovered, setTooltipHovered] = useState<string>("");
-
-  const users = ["Dan", "Jane", "Tim"];
-
   return (
-    <>
-      <Button>Github</Button>
-      <IconButton ariaLabel="button" className="bg-primary h-6 w-2">
-        Button
-      </IconButton>
-      <AvatarGroup>
-        {users.map((user) => (
-          <Tooltip
-            key={user}
-            content={user}
-            position="top"
-            tooltipWidth="small"
-            customClassName="text-xs font-medium w-fit"
-            isDisplay={tooltipHovered === user}
-            hovered={tooltipHovered === user}
-          >
-            <Avatar>
-              <img
-                src="https://gravatar.com/avatar/a6416cf1e8d0208251a732a6af75530878cdfd92b85d2de9ba6c4fec92d8a157?s=200&r=g&d=robohash"
-                width={40}
-                height={40}
-                onMouseEnter={() => {
-                  setTooltipHovered(user);
-                }}
-                onMouseLeave={() => {
-                  setTooltipHovered("");
-                }}
-              />
-            </Avatar>
-          </Tooltip>
+    <Routes>
+      {/* Main Layout */}
+      <Route element={<MainLayout routes={routes} />}>
+        <Route path="/" element={<Navigate to="/applications" replace />} />
+        {routes.map((route) => (
+          <Route
+            key={route.key}
+            path={`/${route.path}`}
+            element={<DataTable data={route.label} />}
+          />
         ))}
-      </AvatarGroup>
-    </>
+      </Route>
+
+      {/* Auth Layout */}
+      <Route element={<AuthLayout />}>
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+      </Route>
+    </Routes>
   );
 }
 
